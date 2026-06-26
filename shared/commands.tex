@@ -12,9 +12,19 @@
 \DeclareMathOperator{\Vect}{Vect}
 \DeclareMathOperator{\Span}{span}
 
-\newcommand{\lecture}{\stepcounter{lecture}\todo{Lecture \thelecture}}
+\newcommand{\lecture}[1]{%
+	\stepcounter{lecture}%
+	\todo[caption={Cours n° \thelecture -- #1}]{%
+		Cours n° \thelecture
+	}%
+}
 
 \newcommand{\et}{\quad \text{et} \quad}
+\newcommand{\Rn}{\R^n}
+\newcommand{\Rm}{\R^m}		
+
+\newcommand{\norme}[1]{\| #1 \|}
+\newcommand{\entiers}{\llbracket 1, n \rrbracket}
 
 \newcommand{\prf}[1]{
 	\begin{proof}

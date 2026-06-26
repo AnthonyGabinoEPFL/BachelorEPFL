@@ -1,0 +1,177 @@
+\chapter{Intégrales généralisées}
+\lecture{16 février}
+On se pose la question de comment généraliser la définition de l'intégrale de Riemann $\int_a^b f(x) ~\mathrm dx$ dans le cas où l'intervalle d'intégration est borné mais pas fermé, comme avec les exemples suivants :
+\[
+\int_0^1 \ln(x)~\mathrm dx , \quad \int_0^1 \frac{1}{x} ~\mathrm dx
+\]
+ou encore, comment généraliser la définition de l'intégrale sur un intervalle non borné, par exemple :
+\[
+\int_0^\infty e^{-x} ~\mathrm dx, \quad \int_{-\infty}^\infty \frac{1}{1 + x^2} ~\mathrm dx
+\]
+
+\section{Intégrale généralisée sur un intervalle borné}
+On considère dans ce sous chapitre uniquement des fonctions définie sur un intervalle borné.
+
+\begin{definition}[Intégrale convergente] \label{def : intégrale convergente}
+Soit $f : [a, b[ \to \R$ intégrable au sens de Riemann sur tout sous-intervalle fermé $J \subset [a,b[$ et $F(t) = \int_a^t f(x) ~\mathrm dx$ pour tout $t\in [a,b[$. Alors si $\lim_{t \to b^-} F(t)$ existe, on dit que $\int_a^b f(x) ~\mathrm dx$ existe et on pose,
+	\[
+	\int_a^b f(x) ~\mathrm dx = \lim_{t \to b^-} F(t)
+	\]
+Tandis que si $\lim_{t \to b^-} F(t)$ n'existe pas on dit que l'intégrale diverge. La définition reste analogue si $f$ est définie sur l'intervalle $]a,b]$.
+\end{definition}
+
+\begin{exemple}
+	On étudie l'éxistence de l'intégrale généralisée
+	\[
+	\int_0^1 \frac1{x^\alpha} \mathrm d x
+	\]
+	Pour $\alpha \in \R$.
+	Ainsi soit $F(t) = \int_t^1 \frac1{x^\alpha} \mathrm dx$ pour $t \in ]0,1]$ qui est bien définie car la fonction $f(x) = x^{-\alpha}$ est continue sur $[t,1]$ pour tout $t \in ]0,1]$ donc intégrale au sens de Riemann sur $[t,1]$. Pour $\alpha \neq 1$ on a
+	\[
+	F(t) = \int_t^1 \frac{1}{x^\alpha} \mathrm d x = \left. \frac{x^{1- \alpha}}{1 - \alpha} \right|_t^1 = \frac1{1 - \alpha} - \frac{t^{1- \alpha}}{1 - \alpha}
+	\]
+	tandis que si $\alpha = 1$
+	\[
+	F(t) = \int_t^1 \frac1x \mathrm d x = \left. \ln x \right|_t^1 = - \ln t
+	\]
+	On en conclut alors que
+	\[
+	\lim_{t \to 0^+} F(t) = \left\{\begin{array}{lc}
+								\frac1{1 - \alpha} & \alpha < 1  \\
+								+ \infty & \alpha \geqslant 1 
+							\end{array}\right.
+	\]
+	on en déduit alors que l'intégrale généralisée $\int_0^1 \frac1{x^\alpha} \mathrm d x $ converge si et seulement si $\alpha < 1$.
+\end{exemple}
+
+\begin{lemme}
+	Soit $f : [a,b[ \to \R$ continue, si $f$ est prolongeable par continuité en $b$, on définit la fonction continue sur $[a,b]$,
+\[
+\tilde f (x) = \left \{ \begin{array}{lr}
+							f(x) & \quad x \in [a,b[, \\
+							\lim_{t \to b^-} f(t)& x = b.
+						\end{array}
+				\right.
+\]
+Alors l'intégrale généralisée $\int_a^b f(x) ~\mathrm dx$ existe et,
+\[
+\int_a^b f(x) ~\mathrm dx = \int_a^b \tilde f (x) ~\mathrm dx
+\]
+\end{lemme}
+
+\begin{lemme}[Critère de comparaison] \label{lem: critère de comparaison}
+	Soit $f, g : [a,b[ \to \R$ deux fonctions intégrables sur tout sous-intervalle $J \subset [a,b[$ et supposons qu'il existe $c \in [a,b[$ tel que,
+	\[
+	\forall x \in c, b[, \quad 0 \leqslant f(x) \leqslant g(x) 
+	\]
+	Si $\int_a^b g(x) ~\mathrm dx$ existe, alors $\int_a^b f(x) ~\mathrm dx$ existe aussi. Inversement, si $\int_a^b f(x) ~\mathrm dx$ diverge, alors $\int_a^b g(x) ~\mathrm dx$ diverge aussi.
+\end{lemme}
+
+\prf{Si $\int_a^b g(x) ~\mathrm dx$ existe alors $\int_c^b g(x) ~\mathrm dx$ existe aussi. De plus, pour tout $t \in [c, b[$,
+	\[
+	F(t) = \int_c^t f(x) ~\mathrm dx \int_c^t g(x) ~\mathrm dx \leqslant \int_c^b g(x) ~\mathrm dx < + \infty
+	\]
+	Puisque $F$ est croissant et bornée supérieurement sur $[c,b[$, on a que $\lim_{t \to b^-} F(t)$ existe. Ainsi $\int_c^b f(x) ~\mathrm dx$ converge et 
+	\[
+	\int_a^b f(x) ~\mathrm dx = \lim_{t \to b^-} \int_a^t f(x) ~\mathrm dx = \int_a^c f(x) ~\mathrm dx + \lim_{t \to b^-} \int c^t f(x) ~\mathrm dx 
+	\]
+	existe aussi. La seconde affirmation est la contraposée de la première.
+} 
+\section{Intégrale généralisée sur intervalle bornée ouvert}
+\begin{definition}
+Soit $f : ]a,b[ \to \R$ intégrable sur tout sous-intervalle fermé $J \subset ]a,b[$. Pour $c \in ]a,b[$, si les deux intégrales généralisées
+	\[
+	\int_a^c f(x) ~\mathrm dx \et \int_c^b f(x) ~\mathrm dx
+	\]
+convergent, on dit que l'intégrale généralisée $\int_a^b f(x) ~\mathrm dx$ converge et l'on pose, par définition, que
+\[
+\int_a^b f(x) ~\mathrm dx =  \int_a^c f(x) ~\mathrm dx + \int_c^b f(x) ~\mathrm dx 
+\]
+Dans le cas contraire, lorsque l'une ou l'autre des intégrales généralisées diverge, on dit que l'intégrale généralisée $\int_a^b f(x) ~\mathrm dx$ diverge.
+\end{definition}
+
+\begin{proposition}
+	Soit $f : ]a,b[ \to \R$ intégrable sur tout sous-intervalle fermé $J \subset ]a,b[$ alors l'existence (ou non) de l'intégrale généralisée $\int_a^b f(x) ~\mathrm dx$ ne dépend pas du choix de $c \in ]a,b[$.
+ \end{proposition}
+\prf{Soit $\tilde c \in ]a,b[, \tilde c \neq x$, alors
+	\[
+	\int_a^{\tilde c} f(x) ~\mathrm dx = \int_a^c f(x) ~\mathrm dx + \int_c^{\tilde c}
+	\]
+	existe si et seulement si $\int_a^c f(x) ~\mathrm dx$ existe, car $f$ est intégrale sur $[c, \tilde c]\cup[\tilde c,c]$. De même,
+	\[
+	\int_{\tilde c}^b f(x) ~\mathrm dx = \int_{\tilde c}^c f(x) ~\mathrm dx + \int_c^b f(x) ~\mathrm dx
+	\]
+	existe si et seulement si $\int_c^b f(x) ~\mathrm dx$ existe. Et 
+	\[
+	\int_a^{\tilde c} f(x) ~\mathrm dx + \int_{\tilde c}^b f(x) ~\mathrm dx =  \int_a^c f(x) ~\mathrm dx + \int_c^{\tilde c} f(x) ~\mathrm dx  + \int_{\tilde c}^c f(x) ~\mathrm dx  + \int_c^b f(x) ~\mathrm dx  = \int_a^b f(x) ~\mathrm dx 
+	\]
+}
+\begin{definition}[Intégrale généralisée absolument convergente]
+	Soit $I$ un intervalle borné quelconque et $f : I \to \R$ intégrable sur tout sous-intervalle fermé bornée. On dit que l'intégrale généralisée \emph{converge absolument} si
+	\[
+	\int_I |f(x)| \mathrm d x 
+	\]
+	converge.
+\end{definition}
+
+\begin{proposition}Si l'intégrale $\int_I f(x) ~\mathrm dx$ est absolument convergente, alors elle converge.
+ \end{proposition}
+
+\prf{On pose $f_+(x) = \max\{ f(x), 0 \}$ et $f_-(x) = -\min \{ f(x),0\}$. On a par définition $f(x) = f_+(x)  - f_-(x)$ et $|f(x)| = f(x)_+ + f_-(x)$, ainsi
+	\[
+	\forall x \in I, \quad 0 \leqslant f_+(x) \leqslant |f(x)| \et 0 \leqslant f_-(x) \leqslant |f(x)|
+	\]
+Donc par le critère de comparaison \eqref{lem: critère de comparaison}, $\int_I f_+(x) ~\mathrm dx $ et $\int_I f_-(x) ~\mathrm dx $ existent, et donc
+\[
+\int_I f(x) ~\mathrm dx = \int_I (f_+(x) - f_-(x)) ~\mathrm dx 
+\]
+existe aussi.
+}
+
+\section{Intégrale généralisée sur un intervalle non borné}
+\lecture{18 février}
+\begin{definition}
+	Si $I = [a, \infty[$ et $f : I \to \R$ intégrable sur tout sous intervalle fermé borné. Soit $F(t) = \int_a^t f(x) \mathrm d x$, si $\lim_{t \to \infty} F(t)$ existe alors on dit que l'intégrale généralisée $\int_a^\infty f(x) \mathrm d x$ converge et on note
+	\[
+	\int_a^\infty f(x) \mathrm dx = \lim_{t \to \infty} \int_a^t f(x) \mathrm dx
+	\]
+	De plus on dit que $\int_a^\infty f(x) \mathrm dx$ est \emph{absolument convergente} si $\int_a^\infty |f(x)| \mathrm dx$ converge.
+\end{definition}
+
+
+\begin{remarque}Il est claire que les intégrales généralisée sur un intervalle non borné possèdent les mêmes propriétés que celle restreint sur un intervalle bornée. Ainsi les résultats précédents sont extensibles dans le cas des intégrales généralisées sur un intervalle non bornée.
+\end{remarque}
+
+\begin{definition}
+	Si $I = ]a, \infty[$ on dit que $\int_a^\infty f(x) \mathrm d x$ converge s'il existe $c \in ]a, \infty[$ tel que $\int_a^c f(x) \mathrm d x$ et $\int_c^\infty f(x) \mathrm d x$ convergent. Dans ce cas on note
+	\[
+	\int_a^\infty f(x) ~\mathrm d x = \int_a^c f(x) ~\mathrm d x + \int_c^\infty f(x) ~\mathrm d x
+	\]
+\end{definition}
+
+\begin{exemple}Soit $f(x) = \frac1{x^\alpha}$
+\begin{enumerate}
+	\item Si $\alpha \leqslant 0$ alors $\int_1^\infty f(x) ~\mathrm d x$ diverge.
+	\item Si $\alpha > 0$ alors
+	\[
+	F(t) = \int_1^t \frac{1}{x^\alpha} ~\mathrm d x = \left. \frac{x^{1- \alpha}}{1 - \alpha} \right|_1^t = \frac{1}{1 - \alpha} ( t^{1 - \alpha} -1)
+	\]
+\end{enumerate}
+	On en conclut alors que l'intégrale généralisée $\int_1^\infty \frac{1}{x^\alpha} ~\mathrm d x$ converge si et seulement si $\alpha > 1$.
+\end{exemple}
+
+\begin{proposition}
+	Si $\lim_{t \to \infty} \frac{f(x)}{g(x)} = l \in \R$ existe et si $\int_c^\infty g(x) \mathrm d x $ converge alors
+	\[
+	\int_c^\infty f(x) ~\mathrm d x 
+	\]
+	converge aussi. Typiquement on prend $g(x) = x^{-\alpha}$ avec $\alpha > 1$.
+\end{proposition}
+
+\prf{Car la limite converge, on a pour $\varepsilon > 0$
+	\[
+	\exists M > 0, ~\forall x \geqslant M, \quad l - \varepsilon \leqslant \frac{f(x)}{g(x)} \leqslant l + \varepsilon
+	\]
+	donc $f(x) \leqslant  g(x)(l + \varepsilon)$ pour tout $x \geqslant M$. On peut alors appliquer le critère de comparaison.
+}
+

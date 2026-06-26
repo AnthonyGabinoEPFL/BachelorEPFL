@@ -9,32 +9,32 @@
 % --- Maths ---
 \usepackage{amsmath, amssymb, amsthm, amsfonts}
 \usepackage{bm}
+\usepackage{stmaryrd}
 
 % --- Mise en page ---
-\usepackage[margin=1in]{geometry}
-\usepackage{lmodern}
-\usepackage[colorlinks=true, linkcolor=DAcolor, urlcolor=DAcolor]{hyperref}
-\usepackage{graphicx}
-\usepackage{todonotes}
+\usepackage[margin=1in]{geometry} %marge
+\usepackage{lmodern} %police d'écriture vectoriel
+\usepackage[colorlinks=true, linkcolor=DAcolor, urlcolor=DAcolor]{hyperref} %référence
+\usepackage{graphicx} %images
+\usepackage{todonotes} %lecture note
+\usepackage{fancyhdr} %en-tête
+\usepackage{titlesec} %format section
 \usepackage{marginnote}
-\usepackage{fancyhdr}
-\usepackage{titlesec}
 
-\usepackage{setspace}
+\usepackage{setspace} %interligne
 
+\usepackage{xcolor} %couleur perso
 
-\usepackage{tcolorbox}
-\tcbuselibrary{theorems, skins}
-\usepackage{xcolor}
-
-\tcbuselibrary{skins, breakable}
-
-\usepackage{hyperref}
+%Définition de la couleur de la DA générale
+\definecolor{DAcolor}{RGB}{50,0,100}    % théorème
+\definecolor{DAcolordarker}{RGB}{25,0,50}
 
 %===================================
 %	Implémentation des lectures
 %===================================
-\setuptodonotes{noline, color=DAcolor!20, size=\footnotesize}
+\setlength{\marginparwidth}{2cm}
+
+\setuptodonotes{noline, color=DAcolor!20, size=\tiny}
 \makeatletter
 \@todonotes@SetTodoListName{Cours}
 \makeatother
@@ -63,7 +63,7 @@
 
 \newtheoremstyle{coloredtitlenoint}
 {}{}                          % espace avant/après
-{}                    % corps en italique (comme plain)
+{}                    % corps pas en italique (definition)
 {}                            % pas d'indentation
 {\bfseries}                   % titre en gras (comme plain)
 {.}                           % ponctuation après le titre
@@ -71,24 +71,22 @@
 {\textcolor{DAcolor}{\bfseries\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}}
 
 \theoremstyle{coloredtitle}
-\newtheorem{thm}{Théorème}[chapter]
-\newtheorem{lem}{Lemme}[chapter]
-\newtheorem{prop}{Proposition}[chapter]
+\newtheorem{theorem}{Théorème}[chapter]
+\newtheorem{lemme}{Lemme}[chapter]
+\newtheorem{proposition}{Proposition}[chapter]
 
 \theoremstyle{coloredtitlenoint}
 \newtheorem{definition}{Définition}[chapter]
 \newtheorem{exemple}{Exemple}[chapter]
+\newtheorem{remarque}{Remarque}[chapter]
 
 \setcounter{secnumdepth}{3}
 
-% Théorème — encadré complet (peu fréquent, justifié)
-\definecolor{DAcolor}{RGB}{50,0,100}    % théorème
-\definecolor{DAcolordarker}{RGB}{25,0,50}
-%\definecolor{DAcolor}{RGB}{0,0,102}    % théorème
-%\definecolor{DAcolordarker}{RGB}{0,0,50}
 
-
-% Définition — trait gauche uniquement (supporte les successions)
+%redéfinition de l'environnement "proof"
+\renewenvironment{proof}
+{\noindent \textsc{Démonstration} :\newline}
+{\qed}
 
 
 

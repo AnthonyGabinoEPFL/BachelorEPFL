@@ -1,0 +1,334 @@
+\chapter{Fonctions des plusieurs variables réelles ; limites et continuité}
+
+\begin{definition}[limite de fonction] \label{def: limite de fonction}
+Soit $ f : E \to \R$ et $\bm x_0 \in \Rn$ un point d'accumulation de $E$. On dit que $\lim_{\bm x \to \bm x_0} f(\bm x)$ existe et est égale à $l \in \R$ si,
+	\[
+	\forall \varepsilon > 0, \exists \delta > 0, \forall \bm x \in E, \quad  0 < \norme{\bm x - \bm x_0} \leqslant \delta \implies |f(\bm x) - l| \leqslant \varepsilon
+	\]
+	On écrit alors $\lim_{\bm x \to \bm x_0} f(\bm x) = l$.
+\end{definition}
+
+\begin{theorem}[Caractérisation de la limite par les suites] \label{thm : Caractérisation de la limite par les suites}
+	Soit $f : E \to \R$ et $\bm x_0 \in \Rn$ un point d'accumulation de $E$. Alors $f$ admet pour limite $l$ lorsque $\bm x$ tend vers $\bm x_0$ si et seulement si,
+	\[
+	\forall (\bm x^k) \subset E \backslash \{ \bm x_0\}, \quad \lim_{k \to \infty} \bm x^k = \bm x_0 \implies \lim_{\bm x \to \bm x_0} f(\bm x^k) = l
+	\]
+    De plus la limite $l$, si elle existe, est unique.
+\end{theorem}
+
+\prf{Supposons que $f$ admet pour limite $l$ lorsque $\bm x$ tend vers $\bm x_0$, alors
+	\[
+	\forall \varepsilon > 0, \exists \delta > 0, \forall \bm E, \quad 0 < \norme{\bm x - \bm x_0} \leqslant \delta \implies |f(\bm x) - f(\bm x_0)| \leqslant \varepsilon
+	\]
+	Ainsi pour $(\bm x^k) \subset E \backslash \{ \bm x_0\}$ une suite telle que $\lim_{k \to \infty} \bm x^k = \bm x_0$. Alors
+	\[
+	\exists N \in \N, \forall k \geqslant N, \quad \norme{\bm x^k - \bm x_0} \leqslant \delta
+	\]
+	ainsi $|f(\bm x^k) - l| \leqslant \varepsilon$, ce qui montre bien que $\lim_{k \to \infty} f(\bm x^k) = l$. Réciproquement supposons que $\lim_{k \to \infty} f(\bm x^k) = l $ pour tout suite $(\bm x^k)$ qui converge vers $\bm x_0$. En raisonnant par l'absurde, supposons  que $f$ n'admette pas pour limite $l$ lorsque $\bm x$ tend vers $\bm x_0$ donc,
+	\[
+	\exists \varepsilon> 0, \forall \delta > 0, \exists \bm x \in E, \quad 0 < \norme{\bm x- \bm x_0} \leqslant \delta \et |f(\bm x) - l | \geqslant \varepsilon
+	\]
+	Si on pose $\delta = \frac{1}{k}$, on obtient une suite $(\bm x^k)$ telle que $\norme{\bm x^k - \bm x_0} \leqslant \frac{1}{k}$ et $|f(\bm x^k) - l | \geqslant \varepsilon$, ce qui est contradictoire.
+}
+
+\begin{theorem}[Théorème des gendarmes] \label{thm: théorème des gendarmes}
+	Soit $f,g,h : E \to \R$ et $\bm x_0 \in \Rn$ un point d'accumulation de $E$. Si $\lim_{\bm x \to \bm x_0} h(\bm x) = \lim_{\bm x \to \bm x_0} g(\bm x) = l$ et, s'il existe $\delta > 0$ tel que,
+	\[
+	\forall \bm x \in E, \quad 0 < \norme{\bm x - \bm x_0} \leqslant \delta \implies h(\bm x) \leqslant f(\bm x) \leqslant g(\bm x)
+	\]
+	alors $\lim_{\bm x \to \bm x_0} f(\bm x) = l$.
+\end{theorem}
+\lecture{5 mars}
+\prf{Soit $(\bm x^k) \subset E \backslash \{\bm x_0\}$ une suite arbitraire qui converge vers $\bm x_0$. On en déduit que,
+	\[
+	\exists N \in \N, \forall k \geqslant N, \quad h( \bm x^k) \leqslant f(\bm x^k) \leqslant g(\bm x^k)
+	\]
+	Comme,
+	\[
+	\lim_{k \to \infty} h(\bm x^k) = \lim_{k \to \infty} g(\bm x^k) = l
+	\]
+	par le théorème des gendarmes usuel sur $\R$, on en déduit que $\lim_{k \to \infty} f(\bm x^k) = l$. Ainsi par le théorème (\ref{Caractérisation de la limite par les suites}) on conclut que 
+	\[
+	\lim_{\bm x \to \bm x_0} f(\bm x^k) = l
+	\]
+}
+
+\begin{proposition}
+	Dans la pratique, on utilise souvent une fonctions $g$ qui dépend uniquement de la distance $\norme{\bm x - \bm x_0}$, on pose donc
+	\[
+	\forall \bm x \in E \backslash \{ \bm x_0\}, \quad g(\bm x) = \tilde g(\norme{\bm x - \bm x_0})
+	\]
+	où $\tilde g : ]0, \infty[ \to \R$. Alors on a
+	\[
+	\lim_{\bm x \to \bm x_0} g(\bm x) = l \iff \lim_{r \to 0^+} \tilde g (r) = l
+	\]
+\end{proposition}
+
+\prf{En effet,
+	\[
+	\forall \varepsilon >0, \exists \delta > 0, \forall \in E, \quad 0 < \norme{\bm x- \bm x_0} \leqslant \delta \implies |g(\bm x) - l|  = |\tilde g(\norme{\bm x - \bm x_0}) - l | \leqslant \varepsilon
+	\]
+	si et seulement si
+	\[
+	\forall \varepsilon >0, \exists \delta > 0, \quad \forall r \in ]0, \delta], \quad |\tilde g (r) - l | \leqslant \varepsilon
+	\]
+}
+
+\begin{theorem}[Critère de Cauchy] \label{thm: Critère de Cauchy}
+Soit $f : E \to \R$ et $\bm x_0 \in \R$ un point d'accumulation de $E$. Alors $\lim_{\bm x \to \bm x_0} f(\bm x)$ existe si et seulement si
+	\[
+	\forall \varepsilon >0, \exists \delta >0, \forall \bm x, \bm y \in \overline B (\bm x_0, \delta) \cap( E \backslash \{ \bm x_0\}), \quad | f(\bm x) - f(\bm y)| \leqslant \varepsilon
+	\]
+\end{theorem}
+
+
+\prf{Premièrement, supposons que $\lim_{\bm x \to \bm x_0} = l$, alors
+	\[
+	\forall \varepsilon >0, \exists \delta > 0, \forall \bm x \in \overline B(\bm x_0, \delta) \cap (E \backslash \{ \bm x_0\}), \quad |f(\bm x) - l | \leqslant \varepsilon / 2
+	\]
+	Donc pour tout $\bm x, \bm y \in \overline B(\bm x_0, \delta) \cap (E \backslash \{\bm x_=\})$, 
+	\[
+	|f(\bm x) - f(\bm y) | \leqslant |f(\bm x) - l | + | f(\bm y) - l | \leqslant \varepsilon / 2 + \varepsilon / 2 = \varepsilon
+	\]
+	Réciproquement, pour $\varepsilon = 1$, 
+	\[
+	\exists \delta_1 > 0, \forall \bm x, \bm y \in \overline B(\bm x_0, \delta_1) \cap (E \backslash \{ \bm x_0\}), \quad |f(\bm x) - f(\bm y) | \leqslant \varepsilon
+	\]
+	Pour $\delta \in ]0, \delta_1]$, on considère
+	\[
+	\alpha(\delta) = \inf \{ f(\bm x) ~|~ \bm x \in \overline B(\bm x_0, \delta) \cap (E \backslash \{\bm x_0\})\} \et \beta(\delta) = \sup \{ f(\bm x) ~|~ \bm x \in \overline B(\bm x_0, \delta) \cap (E \backslash \{\bm x_0\})\}
+	\]
+	Il en résulte que,
+	\[
+	\forall \varepsilon >0, \exists \delta \in ]0, \delta_1], \quad 0 \leqslant \beta(\delta) - \alpha(\delta) \leqslant
+	\]
+	et donc comme $\beta - \alpha$ est croissante en $\delta$, $\lim_{r \to 0^+} \beta(r) - \alpha(r) = 0$. On pose $l =  \lim_{r \to 0^+} \beta(r) = \lim_{r \to 0^+} \alpha(r)$. Comme
+	\[
+	\forall \bm x \in \overline B(\bm x_0, \delta_1) \cap (E \backslash \{ \bm x_=\}), \quad \alpha(\norme{\bm x - \bm x_0}) \leqslant f(\bm x) \leqslant \beta(\norme{\bm x - \bm x_0})
+	\]
+	le théorème des deux gendarmes assure que $\lim_{\bm x \to \bm x_0} f(\bm x) = l$
+}
+\section{Limite de fonction à valeurs dans $\Rm$}
+
+\begin{definition}Soit $\bm f: E \to \Rm$ et $\bm x_0$ un point d'accumulation de $E$. On dit que $\lim_{\bm x \to \bm x_0} \bm f(\bm x) = \bm l \in \Rm$ si et seulement si
+	\[
+	\forall \varepsilon > 0, \exists \delta >0, \forall \bm x \in E, \quad 0 < \norme{\bm x- \bm x_0} \leqslant \delta \implies \norme{\bm f(\bm x) - \bm l} \leqslant \varepsilon
+	\]
+\end{definition}
+
+\section{Fonctions continues}
+
+\begin{definition}[Caractérisation de la continuité] \label{def: Caractérisation de la continuité}
+On peut définit la \emph{continuité} de plusieurs manière équivalentes ; Soit $f : E \to \R$ et $\bm x_0 \in \Rn$ un point d'accumulation de $E$. On dit que $f$ est continue en $\bm x_0$ si et seulement si,
+	\begin{itemize}
+		\item \[
+		\lim_{\bm x \to \bm x_0} f(\bm x) = f(\bm x_0)
+		\]
+		\item \[
+		\forall \varepsilon > 0, \exists \delta > 0, \forall \bm x \in E, \quad \norme{\bm x- \bm x_0} \leqslant \delta \implies |f(\bm x) - f(\bm x_0)| \leqslant \varepsilon
+		\]
+		\item 
+		\[
+		\forall (\bm x^k) \subset E, \quad \lim_{k \to \infty} \bm x^k = \bm x_0 \implies \lim_{k \to \infty} f(\bm x) = f(\bm x_0)
+		\]
+	\end{itemize}
+	On dit que $f : E \to \R$ est continue sur $E$ si elle est continue en tout point $\bm x_0 \in E$. Dans ce cas on note $f \in C^0(E)$.
+\end{definition}
+
+\begin{theorem}[Composition de fonctions continues] \label{thm: Composition de fonctions continues}
+	Soit $\bm f : E \subset \Rn \to \Rm$ continue en $\bm x_0 \in E$ et $\bm g : A \to \Rn$ continue en $\bm y_0$ et telle que $\bm x_0 = \bm g(\bm y_0)$. Alors $\bm h = \bm f \circ \bm g$ est continue en $\bm y_0$.
+\end{theorem}
+
+\prf{Pour toute suite $\bm \{\bm y^k\} \subset A$ telle que $\lim_{k \to \infty} \bm y^k = \bm y_0$, on a par continuité de $\bm g$ que $\lim_{k \to \infty} \bm g(\bm y^k) = \bm g(\bm y_0) = \bm x_0$ et par la continuité de $\bm f$ en $\bm x_0$, $\lim_{k \to \infty} \bm f(\bm g(\bm y^k)) = \bm f(\bm x_0)$. Donc $ \lim_{k \to \infty} \bm h(\bm y^k) = \bm h(\bm y_0)$, ce qui montre la continuité de $\bm h$ en $\bm x_0$.
+}
+
+\begin{definition}[Uniforme continuité] \label{def: Uniforme continuité}
+	On dit que $f : E \to \R$ est \emph{uniformément continue} sur $E$ si et seulement si,
+	\[
+	\forall \varepsilon > 0, \exists \delta > 0, \forall \bm x, \bm y \in E, \quad \norme{\bm x -\bm y} \leqslant \delta \implies |f(\bm x) - f(\bm y)| \leqslant \varepsilon 
+	\]
+\end{definition}
+
+\begin{proposition} 
+	Soit $f : E \to \R$ une fonction uniformément continue, alors $f$ est continue.
+\end{proposition}
+
+
+\prf{C'est immédiat par définition de l'uniforme continuité,
+	\[
+	\forall \bm x \in E, \forall \varepsilon >0, \exists \delta > 0, \forall \bm y \in E, \quad \norme{\bm x - \bm y} \leqslant \delta \implies |f(\bm x) - f(\bm y)| \leqslant \varepsilon
+	\]
+}
+
+
+\section{Prolongement de fonctions par continuité}
+\begin{theorem}[Prolongement par continuité]Soient $E \subset \Rn$ non vide tel que $\overline E \neq E$ et $ \bm f : E \to \Rm$ continue. Supposons que pour tout $\bm x \in \overline E \backslash E$,
+	\[
+	\exists \bm l \in \Rm, \quad \lim_{\bm y \to \bm x} \bm f(\bm y) = \bm l
+	\]
+	On pose donc
+	\[
+	\begin{array}{cccc}
+		\bm{\tilde f}  : & \overline E & \to & \Rm \\
+					& \bm x       & \mapsto & \left \{\begin{array}{cc} 
+													\bm f(\bm x) & \bm x \in E \\
+													\lim_{\bm y \to \bm x} \bm f(\bm y) & \bm x \in \overline E \backslash E
+											\end{array} \right.
+	\end{array}
+	\]
+	Alors $\bm{\tilde f}$ est continue sur $\overline E$ et on appelle $\bm{\tilde f}$ le \emph{prolongement par continuité} de $\bm f$.
+\end{theorem}
+
+\prf{Soit $\bm x \in \overline E$, soit $(\bm x^k) \subset \overline E$ qui converge vers $\bm x$. On construit une suite auxiliaire $(\bm y^k) \subset E$ de la façon suivante,
+	\begin{itemize}
+		\item Si $\bm x^k \in E$, on pose $\bm y^k =  \bm x^k$
+		\item Tandis que si $\bm x^k \in \overline E \backslash E$, par caractérisation de la frontière on choisit $\bm y^k \in E$ tel que,
+		\[
+		\norme{\bm x^k - \bm y^k} \leqslant \frac{1}{2^k} \et \norme{\bm{\tilde f}(\bm x^k) - \bm f(\bm y^k)} \leqslant  \frac{1}{2^k}
+		\]
+		
+	\end{itemize}	
+	Ainsi par définition de $\bm{\tilde f}(\bm x)$ et par continuité de $\bm f$,
+	\[
+	\lim_{k \to \infty} \bm f(\bm y^k) = \bm{\tilde f}(\bm x)
+	\]
+	Et donc,
+	\[
+	\lim_{k \to \infty} \bm{\tilde f}(\bm y^k) = \lim_{k \to \infty} (\bm{\tilde f}(\bm x^k) - \bm f(\bm y^k)) + \lim_{k \to \infty} \bm f(\bm y^k)= \bm{\tilde f}(\bm x)
+	\]
+}
+
+\begin{theorem}[Prolongement par uniforme continuité] \label{thm: Prolongement par unfirme continuité}
+	Soit $E \subset \Rn$ non-vide et $\bm f: E \to \Rm$ une fonction uniformément continue sur $E$. Alors $\bm f$ peut être prolonger par continuité sur $\overline E$ et son prolongement continu $\bm{\tilde f} : \overline E \to \Rm$ est aussi uniformément continue.
+\end{theorem}
+
+\prf{Par hypothèse d'uniforme continuité,
+	\[
+	\forall \varepsilon >0, \exists \delta > 0, \forall \bm x, \bm y \in E, \quad \norme{\bm x - \bm y} \leqslant \delta \implies \norme{\bm f(\bm x) - \bm f(\bm y)} \leqslant \varepsilon
+	\]
+	De plus, pour $\bm x \in \overline E \backslash E$, il existe $(\bm x^k) \subset E$ tel que $\lim_{k \to \infty} \bm x^k = \bm x$, en particulier $(\bm x^k)$ est de Cauchy, donc pour $\delta > 0$,
+	\[
+	\exists N \in \N, \forall k,j \geqslant N, \quad \norme{\bm x^k - \bm x^j} \leqslant \delta \implies \norme{f(\bm x^k)- f(\bm x^j)} \leqslant \varepsilon.
+	\]
+	On en déduit que $(\bm f(\bm x^k))$ est de Cauchy et donc convergente, ainsi
+	\[
+	\exists \bm l \in \Rm, \quad  \lim_{k \to \infty} \bm f(\bm x^k) = \bm l
+	\]
+	On définit alors $\bm{\tilde f}(\bm x) = l$. On veut montrer que la valeur de la limite ne dépend pas de la suite choisie. Ainsi, soit $(\bm a^k) \subset E$ une suite qui converge vers $\bm x$ et,
+	\[
+	\lim_{k \to \bm a^k} f(\bm a^k) = \bm m
+	\]
+	on sait qu'il existe $N \in \N$ tel que,
+	\[
+	\forall k \geqslant N, \quad |\bm f(\bm a^k) - \bm m| \leqslant \varepsilon, \quad | \bm f(\bm x^k) - \bm l | \leqslant \varepsilon \et \norme{\bm x^k - \bm a^k} \leqslant \delta
+	\]
+	Ainsi,
+	\[
+	\norme{\bm l - \bm m} \leqslant \norme{\bm l - \bm f(\bm x^k)} + \norme{\bm f(\bm x^k) - \bm f(\bm a^k)} + \norme{\bm f(\bm a^k) - \bm m} \leqslant 3 \varepsilon
+	\]
+	Il reste donc à montrer que $\bm{\tilde f}$ est bel et bien uniformément continue sur $\overline E$. Soit $\varepsilon > 0$, comme $\bm f$ est uniformément continue sur $E$, on sait que,
+	\[
+	\exists \delta > 0, \forall \bm x, \bm y \in E, \quad \norme{\bm x - \bm y} \leqslant \delta \implies \norme{\bm f(\bm x) - \bm f(\bm y)} \leqslant \varepsilon
+	\]
+	Maintenant pour $\bm y,\bm z \in  \overline E$ tels que $\norme{\bm y - \bm z} \leqslant \frac{\delta}{3}$. Alors il existe deux suite $(\bm y^k) \subset E$ et $(\bm z^k) \subset E$ qui convergent respectivement vers $\bm y$ et $\bm z$. Donc il existe $N \in \N$ tel que
+	\[
+	\forall k \geqslant N, \quad \norme{\bm y^k - \bm y} \leqslant \frac{\delta}{3} \et \norme{\bm z^k - \bm z} \leqslant \frac{\delta}{3}
+	\]
+	Donc
+	\[
+	\forall k \geqslant N, \quad \norme{\bm y^k - \bm z^k} \leqslant \norme{\bm y^k - \bm y} + \norme{\bm y- \bm z} + \norme{\bm z - \bm z^k} \leqslant \delta
+	\]
+	Par uniforme continuité de $f$,
+	\[
+	\forall k \geqslant N, \quad \norme{\bm f(\bm y^k) - \bm f(\bm x^k)} \leqslant \varepsilon
+	\]
+	et donc, par passage à la limite,
+	\[
+	\norme{\bm{\tilde f} (\bm y) - \bm{\tilde f}(\bm z)} \leqslant \varepsilon
+	\]
+	
+}
+
+\section{Fonction continues sur un compact}
+\lecture{10 mars}
+\begin{theorem}
+	Soit $E$ un compact non vide et  $f : E \to \R$	 une fonction continue. Alors
+	\begin{itemize}
+		\item $f$ est bornée
+		
+		\item $f$ atteint ses bornes, c'est-à-dire,
+		\[
+		\exists \bm x_m, \bm x_M \in E, \quad f(\bm x_M) = \sup_{\bm x \in E} f(\bm x) \et f(\bm x_m) = \inf_{\bm x \in E} f(\bm x)
+		\]
+		\item Si $E$ est aussi connexe par arc, alors $f$ prend toute les valeurs entre $f(\bm x_m)$ et $f(\bm x_M)$, c'est-à-dire,
+		\[
+		\mathrm{Im}f = [f(\bm x_m), f(\bm x_M)]
+		\]
+	\end{itemize}
+\end{theorem}
+
+\prf{Dans l'ordre on a,
+	\begin{itemize}
+		\item Supposons $f$ non bornée,
+		\[
+		\forall k > 0, \exists \bm  x^k \in E, \quad |f(\bm x^k)| \geqslant k
+		\]
+		mais par compacité de $E$ il existe une sous-suite $(\bm x^{k_i})$ qui converge vers $\bm x \in E$ et donc par continuité de $f$,
+		\[
+		\lim_{i \to \infty} f(\bm x^{k_i}) = f(\bm x)
+		\]
+		ce qui contredit le fait que $f$ est supposée non bornée car $\forall i \in \N, \quad f(\bm x^{k_i}) \geqslant k_i > i$.
+		
+		\item Si on note,
+		\[
+		m = \inf_{\bm x \in E} f(\bm x) \et M = \sup_{\bm x \in E} f(\bm x)
+		\]
+		par caractérisation des extremums on sait qu'il existe deux suites $(\bm a^k), (\bm b^k) \subset E$ telles que,
+		\[
+		\lim_{k \to \infty} f(\bm  a^k) = m \et \lim_{k \to \infty}  f(\bm b^k) = M
+		\]
+		De plus comme $E$ est compact, on peut extraire des sous-suites $(\bm a^{k_i})$ et $(\bm b^{k_i})$ qui converge respectivement vers $\bm x_m$ et $\bm x_M$ qui appartiennent à E. Ainsi par continuité de $f$,
+		\[
+		m = \lim_{k \to \infty} f(\bm a^k) = \lim_{i \to \infty} f(\bm a^{k_i}) = f(\bm x_m)
+		\]
+		et 
+		\[
+		M = \lim_{k \to \infty} f(\bm b^k) = \lim_{i \to \infty} f(\bm b^{k_i}) = f(\bm x_M)
+		\]
+		\item D'après le point précédent, on sait qu'il existe $\bm x_m$ et $\bm x_M$ tel que $f(\bm x_m) = \min_{\bm x \in E} f(\bm x)$ et $f(\bm x_M)= \max_{\bm x\in E} f(\bm x)$. De plus comme $E$ est connexe par arc, il existe un chemin $\bm \gamma : [0,1] \to E$ tel que $\bm \gamma (0) = x_m$ et $\bm \gamma(1) = x_M$. Ainsi par continuité de $f \circ \bm \gamma : [0,1] \to \R$, on obtient par le théorème des valeurs intermédiaires,
+		\[
+		f \circ \bm \gamma ([0,1]) = [\min_{t \in [0,1]} f(\bm \gamma (t)), \max_{t \in [0,1]} f(\bm \gamma(t))] = [f(x_m), f(x_M)]
+		\]
+		ce qui entraîne bien
+		\[
+		\mathrm{Im} f = [f(x_m), f(x_M)]
+		\]
+			
+	\end{itemize}
+}
+
+\begin{theorem}[Théorème de Cantor-Heine généralisé] \label{thm: théorème de Cantor-Heine généralisé}
+	Soient $E \subset \Rn$ un ensemble quelconque, $K \subset E$ un sous-ensemble non-vide et compact, et $\bm f : E \to \Rm$ une fonction continue. Alors
+	\[
+	\forall \varepsilon > 0, \exists \delta > 0, \forall \bm x \in K, \forall \bm y \in E, \quad \norme{\bm x - \bm y} \leqslant \delta \implies \norme{\bm f(\bm x) - \bm f(\bm y)} \leqslant \varepsilon
+	\]
+\end{theorem}
+
+\prf{Supposons par l'absurde que ce n'est pas vrai, alors
+	\[
+	\exists \varepsilon > 0, \forall \delta > 0, \exists \bm x \in K, \exists \bm y \in E, \quad \norme{\bm x  - \bm y} \leqslant \delta \et \norme{\bm f(\bm x) - \bm f(\bm y)} > \varepsilon
+	\]
+	Pour un tel $\varepsilon > 0$, on considère $\delta = \frac{1}{k}$ avec $k \in \N^*$, ainsi il existe $\bm x^k \in K$ et $\bm y^k \in E$ tel que,
+	\[
+	\norme{\bm x^k - \bm y^k} \leqslant \frac{1}{k} \et \norme{\bm f(\bm x^k) - \bm f(\bm y^k)} > \varepsilon 
+	\]
+	La suite $(\bm x^k)$ étant bornée, il existe une sous-suite $(\bm x^{k_i})$ qui converge vers $\bm x \in K$. On a alors
+	\[
+	\norme{\bm y^{k_i} - x} \leqslant \norme{\bm y^{k_i} - \bm x^{k_i}} + \norme{\bm x^{k_i} - \bm x} \leqslant \frac{1}{k_i}  + \norme{\bm x^{k_i} - \bm x} \underset{i \to \infty}{\longrightarrow} 0
+	\]
+	donc $\lim_{i \to \infty} \bm y^{k_i} = \bm x$. Mais puisque $\bm f$ est continue en $E$ on a
+	\[
+	\lim_{i \to \infty} \bm f(\bm x^{k_i}) = \bm f(\bm x) = \lim_{i \to \infty} \bm f(\bm y^{k_i})
+	\]
+	ce qui contredit $\norme{\bm f(\bm x^k) - \bm f(\bm y^k)} > \varepsilon$ pour tout $k$.
+}
