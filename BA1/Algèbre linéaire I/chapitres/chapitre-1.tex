@@ -1,0 +1,178 @@
+\chapter{Espace vectoriel}
+\section{Espace vectoriel sur un corps}
+
+
+\lecture
+\begin{definition}[Espace vectoriel] \label{def: Espace vectoriel}
+Soit $\K$ un corps, un $\K$\textbf{-espace vectoriel} $V$ est groupe commutatif muni d'une loi de composition externe
+	\[
+	\begin{array}{cccc}
+		\cdot * \cdot : & \K \times V & \to & V \\
+						& (\lambda, v) & \mapsto & \lambda * v
+	\end{array}
+	\]
+ayant les propriétés :
+\begin{description}
+	\item[Associativité :] $\forall \lambda_1, \lambda_2 \in \K$ et $v \in V$,
+	\[
+	(\lambda_1 \cdot \lambda_2) * v = \lambda_1 * (\lambda_2 * v)
+	\]
+	\item[Distributivité :] $\forall \lambda_1, \lambda_2 \in \K$ et $v_1, v_2 \in V$,
+	\[
+	(\lambda_1 + \lambda_2) * v_1 = \lambda_1 * v_1 + \lambda_2 * v_1 \et \lambda_1 * (v_1 + v_2) = \lambda_1 * v_1 + \lambda_1 * v_2
+	\]
+	\item[Neutralité de $1$ :] $\forall v \in V$,
+	\[
+	1 * v = v	
+	\]
+\end{description}
+Les éléments $v$ de $V$ sont appelés des \textbf{vecteurs} tandis que les éléments $\lambda \in \K$ sont appelés des \textbf{scalaire}.
+\end{definition}
+
+
+\begin{definition}[$\K$-algèbre] \label{def: algèbre}
+Soit $\K$ un corps, une $\K-$\textbf{algèbre} est un anneau $(B, +, \cdot)$ possédant une structure de $\K-$espace vectoriel qui vérifie la propriétés d'associativité suivant,
+	\[
+	\forall \lambda \in \K, ~\ v_1, v_2 \in B, \quad \lambda * (v_1 \cdot v_2) = (\lambda * v_1) \cdot v_2 =  v_1 \cdot (\lambda * v_2)
+	\]
+\end{definition}
+
+
+\subsection{Sous-espace vectoriel}
+
+\begin{definition}[Sous-espace vectoriel] \label{def : Sous-espace vectriel}
+Soit $\K$ un corps et $V$ un $\K$-espace vectoriel. Un \text{sous-espace vectoriel} $W \subset V$ d'un $\K$-espace vectoriel est un sous-groupe de $(V, +)$ qui est stable par la multiplication par les scalaires,
+	\[
+	\forall \lambda \in \K, ~\ \forall w \in W, \quad \lambda * w \in W
+	\]
+\end{definition}
+
+\begin{prop}[Critère de sous-espace vectoriel] \label{prop: Critère de sous-espace vectoriel}
+Soit $W \subset V$ un sous-ensemble non-vide d'un $\K$-espace vectoriel, alors $W$ est une sous-espace vectoriel si et seulement si
+	\begin{equation} \label{eq: eq1}
+	\forall \lambda \in \K, ~\ \forall w_1, w_2 \in W, \quad \lambda w_1 + w_2 \in W
+	\end{equation}
+\end{prop}
+
+
+\prf{Pour tout $w_1, w_2 \in W$, et en application la condition \eqref{eq: eq1} à $w_1, w_2$ et $\lambda = -1$ on a,
+	\[
+	w_1 - w_2 \in W
+	\]
+	donc $W$ vérifie le critère de sous-groupe et est donc un sous-groupe de $(V,+)$. Il contient en particulier $0_V$ et alors pour tout $\lambda \in \K$, on a
+	\[
+	\forall w \in W, \quad \lambda * w + 0_V \in W
+	\]
+}
+
+\subsection{Sous-espace vectoriel engendré par un ensemble}
+\begin{definition}[Sous-espace vectoriel engendré] \label{def : Sous-espace vectoriel engendré}
+Soit $X \subset V$ un sous-ensemble d'un $\K$-espace vectoriel, le \textbf{module engendré} par $X$ est le petit petit sous-module de $V$ contenant $X$,
+	\[
+	\langle X \rangle_\K := \bigcap_{X \subset N \subset V} N
+	\]
+\end{definition}
+
+\begin{prop}Soit $V$ un $\K$-espace vectoriel et $X \subset V$ un sous-ensemble de $V$ alors $\langle X \rangle_\K$ est soit le sous-espace vectoriel trivial $\{0_V\}$ si $X$ est vide, soit l'ensemble des combinaisons linéaires de $X$ à coefficients dans $\K$,
+	\[
+	\langle X \rangle_\K = \CL_\K(X) := \left\{ \sum_{i=1}^n \lambda_i * x_i \mid n \geqslant 1, ~ \lambda_i \in \K, ~ x_i \in X\right\}
+	\]
+\end{prop}
+
+\prf{On suppose $X$ non-vide. Soit $N \supset X$ un sous-espace vectoriel contenant $X$ alors pour tout $\lambda_1, \ldots, \lambda_n \in \K$ et tout $x_1, \ldots x_n \in X$ on a
+	\[
+	\sum_{i=1}^n \lambda_i * x_i \in N
+	\]
+	par stabilité de $N$. Donc tout sous-espace vectoriel $N$ contenant $X$ contient $\CL_\K(X)$. 
+	
+	Il reste donc à montrer que $\CL_\K(X)$ est un sous-espace vectoriel, alors soit $v, w \in \CL_\K(X)$ deux combinaisons linéaire d'éléments de $X$, alors il est facile de voir que,
+	\[
+	\lambda * v + w \in \CL_\K(X)
+	\]
+	ainsi par le critère de sous-espace vectoriel $\CL_\K(X)$ \eqref{prop: Critère de sous-espace vectoriel} est bien un sous-espace vectoriel.
+}
+
+
+\begin{definition}[Famille génératrice] \label{def: famille génératrice}
+	Si $\langle X \rangle_\K = V$, on dit que $X$ est une \textbf{famille génératrice} de $V$, de plus on dit que $V$ est de \textbf{type fini} si $X$ est fini.
+\end{definition}
+
+\subsection{Applications linéaires}
+\begin{definition}[Application linéaire] \label{def: application linéaire}
+	Soit $\K$ un corps et $V, W$ deux $\K$-espace vectoriel, une \textbf{application linéaire} entre $V$ et $W$ est un morphisme de groupe,
+	\[
+	\varphi : V \to W
+	\]
+	qui est compatible avec les lois de compositions externes
+	\[
+	\forall \lambda \in \K, ~\ \forall v \in V, \quad \varphi(\lambda * v) = \lambda * \varphi(v)
+	\]
+	On notera
+	\[
+	\Hom_\K(V,W) \et \End_\K(V)
+	\]
+	l'ensemble des applications linéaire $\varphi : V \to W$ et $\varphi : V \to V$ respectivement.
+\end{definition}
+
+\begin{prop}[Critère d'application linéaire] \label{prop: Critère d'application linéaire}
+	Une application entre espaces vectoriels $\varphi$ est une application linéaire si et seulement si 
+	\begin{equation}\label{eq: Critère d'application linéaire}
+	\forall \lambda \in \K, ~\ v_1, v_2 \in V, \quad \varphi(\lambda * v_1 + v_2) = \lambda * \varphi (v_1) + \varphi(v_2)
+	\end{equation}	
+\end{prop}
+
+\prf{On applique \eqref{eq: Critère d'application linéaire} avec $\lambda = 1$. On a donc
+	\[
+	\forall v_1, v_2 \in V, \quad \varphi(v_1 + v_2) = \varphi(v_1) + \varphi(v_2)
+	\]
+	donc $\varphi$ est un morphisme de groupe. On a donc $\phi(0_V) = 0_W$ et donc
+	\[
+	\forall \lambda \in \K, ~\forall v \in V, \quad \varphi(\lambda * v_1) = \varphi(\lambda * v_1 + 0_V) = \lambda * \varphi(v_1) + 0_W = \lambda + \varphi(v_1)
+	\]
+}
+
+\begin{thm}[Espace des applications linéaires] \label{thm: Espace des applications linéaires}
+L'ensemble des applications linéaires $\Hom_\K(V,W)$ possède un structure naturelle de $\K$-espace vectoriel.
+\end{thm}
+
+\prf{On sait qu'une combinaison de deux applications linéaires et linéaire, c'est-à-dire
+	\[
+	\forall \varphi, \phi \in \Hom_\K(V,W), ~\forall \lambda \in \K, \quad \lambda.\varphi + \phi : v \mapsto \lambda \varphi(v) + \phi(v)
+	\]
+	est $\K$-linéaire. Donc le théorème en découle facilement.
+}
+
+\lecture
+
+\section{Famille génératrice, libre et base}
+\begin{definition}[Famille génératrice] \label{def: famille génératrice espace vectoriel}
+	Soit $V$ un $\K$-espace vectoriel. Un sous-ensemble $G \subset V$ est une \textbf{famille génératrice} si
+	\[
+	\Vect (G) = \langle G \rangle_\K = V
+	\]
+	Si $V$ admet une famille génératrice finie, on dit que $V$ est un $\K$-espace vectoriel fini.
+\end{definition}
+
+\begin{definition}[Dimension] \label{def: dimension d'un espace vectoriel}
+	Soit $V$ un $\K$-espace vectoriel de type fini. Si $V$ est non-nul, sa dimension est le cardinal minimum d'une famille génératrice :
+	\[
+	\dim V := \min_{G \text{ génératrice}} |G|
+	\]
+	On dira alors que $V$ est de \textbf{dimension finie} au lieu de type fini.
+\end{definition}
+Supposons que $G = \{ e_1, \ldots, e_d\} \subset V$ soit une famille génératrice finie de $V$ de cardinal $d \geqslant \dim V$. Tout élément $v \in V$ peut donc se représenter sous la forme d'une combinaison linéaire des $e_i$,
+\[
+v = \sum_{i=1}^d v_i e_i, \quad v_i \in \K
+\]
+En d'autres termes, on dispose d'une application "combinaison linéaire" qui est surjective
+\[
+\begin{array}{cccc}
+	\CL_G : & \K^d & \to & V \\
+			& (v_1, \ldots, v_d) & \mapsto & \CL_G(v_1, \ldots, v_d) = v_1 e_1 + \ldots + v_d e_d
+\end{array}
+\]
+\begin{lem}
+	L'application $\CL_G$ est linéaire.
+\end{lem}
+\prf
+

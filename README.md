@@ -41,6 +41,7 @@ Il y a un dossier par semestre contenant un dossier de chaque matière vu lors d
 
 │   	 └── chapitres/
 
+│    ├── ...
 
 ├── BA2/ …
 
@@ -82,10 +83,11 @@ latexmk -pdf "Algèbre linéaire avancée I.tex"
 
 \- Une distribution LaTeX en ligne — \[Overleaf] (https://www.overleaf.com/), mais je vous déconseille de passer par Overleaf, la structure des dossiers et la conception du projet a été conçut sur un IDE local. Ainsi je vous conseil d'utuliser plûtot :
 
-\- Une distribution LaTeX complète — \[MiKeX] (https://miktex.org/) (Linux/Windows/MacOS) + une IDE vous permettant de compiler des fichiers LaTeX -- \[TeXstudion] (https://www.texstudio.org/) ou \[Texmaker] (https://www.xm1math.net/texmaker/)
+\- Une distribution LaTeX complète — \[MiKeX] (https://miktex.org/) (Linux/Windows/MacOS) + une IDE vous permettant de compiler des fichiers LaTeX -- \[TeXstudio] (https://www.texstudio.org/) ou \[Texmaker] (https://www.xm1math.net/texmaker/)
 
 
 
 \## Gitignore
-Afin d'avoir une meilleur lisibilté sur le dépot GitHub, tout les fichiers liés à la compilation latex tel que les fichiers ".aux", ".fls", ".log"... ne se trouvent pas sur le GitHub mais ils se créeront automatiquement une fois que vous lancerez la compilation de votre côté pour la première fois.s
+
+Afin d'avoir une meilleur lisibilté sur le dépot GitHub, tout les fichiers liés à la compilation latex tel que les fichiers ".aux", ".fls", ".log"... ne se trouvent pas sur le GitHub mais ils se créeront automatiquement une fois que vous lancerez la compilation de votre côté pour la première fois.
 
